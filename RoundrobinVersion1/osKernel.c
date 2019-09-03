@@ -24,6 +24,8 @@ tcbType *currentPt;
 /* Stack has been created to support 3 tasks */
 int32_t TCB_STACK[NUMBER_OF_THREADS][STACK_SIZE]; 
 
+void osSchedulerLaunch(void);
+
 /* Assigns all stacks to the all task control blocks */
 static void osKernelStackInit(int i){
 	/* The reason of minus 16 while assigning stack is that excluding processor core registers */
@@ -59,6 +61,8 @@ uint8_t osKernelAddThreads(void(*task0)(void), void(*task1)(void), void(*task2)(
 	/* Location of program counter */
 	TCB_STACK[2][STACK_SIZE - 2] = (int32_t)(task2);
 	
+	currentPt = &tcbs[0];
+	
 	__enable_irq();
 	return 1;
 }
@@ -79,12 +83,12 @@ void osKernelLaunch(uint32_t quanta){
 	/* Setting SysTick's priority to level 7 */
 	SYSPRI3 = (SYSPRI3 & 0x00FFFFFF) | 0xE0000000;
 	/* Set tick period */
-	SysTick->LOAD = (quanta * MILLIS_PRESCALER);
+	SysTick->LOAD = (quanta * MILLIS_PRESCALER) - 1;
 	
 	/* Start SysTick */
 	SysTick->CTRL = 0x00000007;
 	
-	//osSchedulerLaunch();
+	osSchedulerLaunch();
 	
 }
 
