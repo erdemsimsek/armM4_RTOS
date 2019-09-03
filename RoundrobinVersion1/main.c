@@ -1,5 +1,11 @@
 #include "osKernel.h"
 
+#define USE_LED 0
+
+uint32_t counter1 = 0;
+uint32_t counter2 = 0;
+uint32_t counter3 = 0;
+
 enum LEDs{
 	LED_RED	= 0,
 	LED_BLUE,
@@ -30,19 +36,31 @@ int main(void)
 }
 void task0(void){
 	while(1){
+#if USE_LED
 		gpio_set_toggle(LED_RED);
+#else
+		counter1++;
+#endif
 	}
 	
 }
 void task1(void){
 	while(1){
+#if USE_LED
 		gpio_set_toggle(LED_BLUE);
+#else
+		counter2++;
+#endif
 	}
 }
 void task2(void){
 	while(1){
+#if USE_LED
 		gpio_set_toggle(LED_RED);
 		gpio_set_toggle(LED_BLUE);
+#else
+		counter3++;
+#endif	
 	}
 }
 
