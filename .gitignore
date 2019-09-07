@@ -1,13 +1,3 @@
-# Remove keil files
-*/RTE
-*/Objects
-*/Listings
-*.dat
-*.scvd
-*.Erdem
-*.uvoptx
-*.uvprojx
-
 # Prerequisites
 *.d
 
