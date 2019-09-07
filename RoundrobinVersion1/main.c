@@ -1,6 +1,6 @@
 #include "osKernel.h"
 
-#define USE_LED 0
+#define USE_LED 1
 
 uint32_t counter1 = 0;
 uint32_t counter2 = 0;
@@ -67,6 +67,9 @@ void task2(void){
 
 void gpio_set_toggle(enum LEDs which_led)
 {
+	P1->DIR |= BIT0;
+	P2->DIR |= BIT2;
+	
 	if(LED_RED == which_led){
 		/* Configure P1.0 as output  LED Port 1 - RED*/
 		P1->OUT ^= BIT0;                      
