@@ -41,8 +41,6 @@ void task0(void){
 #else
 		counter1++;
 #endif
-		
-		osKernelYield();
 	}
 	
 }
@@ -53,8 +51,6 @@ void task1(void){
 #else
 		counter2++;
 #endif
-		
-		osKernelYield();
 	}
 }
 void task2(void){
@@ -65,8 +61,6 @@ void task2(void){
 #else
 		counter3++;
 #endif	
-		
-		osKernelYield();
 	}
 }
 
